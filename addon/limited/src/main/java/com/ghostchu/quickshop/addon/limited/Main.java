@@ -79,13 +79,13 @@ public final class Main extends JavaPlugin implements Listener {
     final Shop shop = event.getShop();
     final ConfigurationSection storage = shop.getExtra(this);
     if(storage.getInt("limit") < 1) {
-      Log.debug("Shop limit is not enabled on this shop.");
+      Log.debug("此箱子商店不能限購數量!");
       return;
     }
     final int limit = storage.getInt("limit");
     final int playerUsedLimit = storage.getInt("data." + event.getClicker().getUniqueId(), 0);
     plugin.text().of(event.getClicker(), "addon.limited.remains-limits", limit - playerUsedLimit).send();
-    Log.debug("Shop limit is enabled on this shop. Limit: " + limit + " Used: " + playerUsedLimit);
+    Log.debug(箱子限購數量已啟用 每人限購: " + limit + " Used: " + playerUsedLimit);
   }
 
   @EventHandler(priority = EventPriority.MONITOR)
@@ -131,10 +131,10 @@ public final class Main extends JavaPlugin implements Listener {
         if(event.getCalendarTriggerType().ordinal() >= CalendarEvent.CalendarTriggerType.valueOf(manager.getString("period")).ordinal()) {
           manager.set("data", null);
           shop.setExtra(this, manager);
-          Log.debug("Limit data has been reset. Shop -> " + shop);
+          Log.debug("限購紀錄已被重設 Shop -> " + shop);
         }
       } catch(IllegalArgumentException ignored) {
-        Log.debug("Limit data failed to reset. Shop -> " + shop + " type " + manager.getString("period") + " not exists.");
+        Log.debug("重設限購紀錄失敗 Shop -> " + shop + " type " + manager.getString("period") + " not exists.");
         manager.set("period", null);
         shop.setExtra(this, manager);
       }
