@@ -131,10 +131,10 @@ public final class Main extends JavaPlugin implements Listener {
         if(event.getCalendarTriggerType().ordinal() >= CalendarEvent.CalendarTriggerType.valueOf(manager.getString("period")).ordinal()) {
           manager.set("data", null);
           shop.setExtra(this, manager);
-          Log.debug("限購紀錄已被重設 Shop -> " + shop);
+          Log.debug("限購資料已被重設 Shop -> " + shop);
         }
       } catch(IllegalArgumentException ignored) {
-        Log.debug("重設限購紀錄失敗 Shop -> " + shop + " type " + manager.getString("period") + " not exists.");
+        Log.debug("重設限購資料失敗 Shop -> " + shop + " type " + manager.getString("period") + " not exists.");
         manager.set("period", null);
         shop.setExtra(this, manager);
       }
